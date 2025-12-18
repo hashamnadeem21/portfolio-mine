@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Instagram, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import portfolioImage from "./assets/portfolio.jpg";
 
 const Hero = () => {
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Github, href: "https://github.com/hashamnadeem21", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-hasham-nadeem-0075a7243", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/hashamnadeem_", label: "Instagram" },
   ];
 
   return (
@@ -106,9 +107,9 @@ const Hero = () => {
               {/* Image container */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/30 glow-effect">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                  src={portfolioImage}
                   alt="Profile"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-bottom"
                 />
               </div>
 

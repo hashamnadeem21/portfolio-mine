@@ -20,15 +20,15 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Github, href: "https://github.com/hashamnadeem21", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-hasham-nadeem-0075a7243", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/hashamnadeem_", label: "Instagram" },
   ];
 
   return (
     <section id="contact" className="py-24 px-6 relative">
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,7 +58,7 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">Let's talk about your project</h3>
               <p className="text-muted-foreground leading-relaxed">
-                I'm always excited to work on new challenges. Whether you need a mobile app, 
+                I'm always excited to work on new challenges. Whether you need a mobile app,
                 a web platform, or something completely unique, I'd love to hear about it.
               </p>
             </div>
@@ -77,7 +77,7 @@ const Contact = () => {
                 <div>
                   <div className="text-sm text-muted-foreground">Email</div>
                   <a href="mailto:hello@example.com" className="font-medium hover:text-primary transition-colors">
-                    hello@example.com
+                    hasham.nadeem112@gmail.com
                   </a>
                 </div>
               </motion.div>
@@ -94,7 +94,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground">Location</div>
-                  <span className="font-medium">San Francisco, CA</span>
+                  <span className="font-medium">Lahore, Pakistan</span>
                 </div>
               </motion.div>
             </div>

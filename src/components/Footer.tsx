@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Heart, Github, Linkedin, Instagram } from "lucide-react";
+import Logo from "./Logo";
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Github, href: "https://github.com/hashamnadeem21", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-hasham-nadeem-0075a7243", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/hashamnadeem_", label: "Instagram" },
   ];
 
   return (
@@ -19,14 +20,13 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <a href="#" className="text-2xl font-bold gradient-text">
-              Portfolio
-            </a>
+            <Logo />
             <p className="text-muted-foreground mt-2 flex items-center justify-center md:justify-start gap-1">
-              Made with <Heart className="w-4 h-4 text-accent fill-accent" /> by Your Name
+              Made with <Heart className="w-4 h-4 text-accent fill-accent" /> by Muhammad Hasham Nadeem
             </p>
           </motion.div>
 
+          {/* Social Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="flex items-center gap-4"
           >
-            {socialLinks.map((social, index) => (
+            {socialLinks.map((social) => (
               <motion.a
                 key={social.label}
                 href={social.href}
@@ -48,17 +48,18 @@ const Footer = () => {
               </motion.a>
             ))}
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-muted-foreground"
+          >
+            © {new Date().getFullYear()} All rights reserved.
+          </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground"
-        >
-          © {new Date().getFullYear()} All rights reserved.
-        </motion.div>
       </div>
     </footer>
   );
