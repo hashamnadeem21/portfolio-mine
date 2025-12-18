@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { GOOGLE_SHEETS_SCRIPT_URL } from "@/lib/constants";
+import { track } from '@vercel/analytics';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,6 +42,11 @@ const Contact = () => {
       });
 
       if (!response.ok) throw new Error("Submission failed");
+
+      // Track successful submission
+      track('form_submission_success', {
+        service: formData.service,
+      });
 
       toast.success("Message sent successfully! I'll get back to you soon.");
 
