@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 
 const About = () => {
   const skills = [
-    { icon: Smartphone, title: "Mobile Development", desc: "React Native, Flutter, iOS & Android" },
-    { icon: Globe, title: "Web Development", desc: "React, Next.js, TypeScript, Node.js" },
+    { icon: Smartphone, title: "Mobile Development", desc: "React Native, iOS & Android" },
+    { icon: Globe, title: "Web Development", desc: "React, TypeScript, Node.js" },
     { icon: Code, title: "Clean Code", desc: "Best practices, testing, CI/CD" },
   ];
 
   return (
     <section id="about" className="py-24 px-6 relative">
       <div className="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      
+
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -36,13 +36,13 @@ const About = () => {
             className="space-y-6"
           >
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a full-stack developer with a passion for creating seamless digital experiences 
-              across mobile and web platforms. With years of experience in building scalable 
+              I'm a full-stack developer with a passion for creating seamless digital experiences
+              across mobile and web platforms. With years of experience in building scalable
               applications, I bring ideas to life through clean code and intuitive design.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              My journey started with curiosity about how apps work, and now I help businesses 
-              and startups build products that make a difference. I believe in writing code 
+              My journey started with curiosity about how apps work, and now I help businesses
+              and startups build products that make a difference. I believe in writing code
               that's not just functional, but maintainable and elegant.
             </p>
 
