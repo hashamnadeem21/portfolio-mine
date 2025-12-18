@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,13 +33,7 @@ const Navbar = () => {
         }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <motion.a
-          href="#"
-          className="text-2xl font-bold gradient-text"
-          whileHover={{ scale: 1.05 }}
-        >
-          Muhammad Hasham Nadeem
-        </motion.a>
+        <Logo />
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
