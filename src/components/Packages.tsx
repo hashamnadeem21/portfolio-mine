@@ -1,7 +1,9 @@
+import { useState, useEffect, useRef } from "react";
 import { Check, Shield, Smartphone, Globe, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { motion, useInView, animate } from "framer-motion";
+import confetti from "canvas-confetti";
 
 const Packages = () => {
     const packages = [
@@ -55,6 +57,32 @@ const Packages = () => {
         },
     ];
 
+    const handleConfetti = () => {
+        const duration = 5 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+        const interval: any = setInterval(function () {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+
+            const particleCount = 50 * (timeLeft / duration);
+            confetti({
+                ...defaults, particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+            });
+            confetti({
+                ...defaults, particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+            });
+        }, 250);
+    };
+
     return (
         <section id="packages" className="py-20 bg-secondary/30 relative overflow-hidden">
             {/* Background Decorative Elements */}
@@ -99,7 +127,9 @@ const Packages = () => {
                                 </CardHeader>
                                 <CardContent className="flex-grow">
                                     <div className="text-center mb-6">
-                                        <span className="text-4xl font-bold text-primary">{pkg.price}</span>
+                                        <div className="text-4xl font-bold text-primary flex justify-center items-center gap-1">
+                                            <PriceCounter value={pkg.price} onComplete={pkg.highlight ? handleConfetti : undefined} />
+                                        </div>
                                         {pkg.period && <span className="text-muted-foreground">{pkg.period}</span>}
                                     </div>
                                     <ul className="space-y-3">
@@ -117,7 +147,7 @@ const Packages = () => {
                                         variant={pkg.highlight ? "default" : "outline"}
                                         asChild
                                     >
-                                        <a href="#contact">Get Started</a>
+                                        <a href="https://wa.me/923134951116" target="_blank" rel="noopener noreferrer">Get Started</a>
                                     </Button>
                                 </CardFooter>
                             </Card>
@@ -126,6 +156,38 @@ const Packages = () => {
                 </div>
             </div>
         </section>
+    );
+};
+
+const PriceCounter = ({ value, onComplete }: { value: string, onComplete?: () => void }) => {
+    const nodeRef = useRef<HTMLSpanElement>(null);
+    const isInView = useInView(nodeRef, { once: true, margin: "-100px" });
+    const numericValue = parseInt(value.replace(/\D/g, ""));
+    const prefix = value.match(/^\D+/)?.[0] || "";
+
+    useEffect(() => {
+        if (isInView && nodeRef.current) {
+            const node = nodeRef.current;
+            const controls = animate(0, numericValue, {
+                duration: 2.5,
+                ease: "easeOut",
+                onUpdate(v) {
+                    node.textContent = Math.round(v).toString();
+                },
+                onComplete: () => {
+                    if (onComplete) onComplete();
+                }
+            });
+
+            return () => controls.stop();
+        }
+    }, [numericValue, isInView, onComplete]);
+
+    return (
+        <div className="flex items-baseline">
+            <span className="text-2xl mr-1">{prefix}</span>
+            <span ref={nodeRef} className="tabular-nums">{0}</span>
+        </div>
     );
 };
 

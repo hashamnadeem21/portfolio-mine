@@ -83,7 +83,7 @@ const LaptopMockup = ({ image }: { image: string }) => {
           <div className="bg-secondary rounded-t-xl p-3 pb-0 shadow-2xl">
             {/* Camera */}
             <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-muted-foreground/30 rounded-full" />
-            
+
             {/* Screen */}
             <div className="relative rounded-t-lg overflow-hidden bg-background aspect-[16/10]">
               <img
@@ -91,7 +91,7 @@ const LaptopMockup = ({ image }: { image: string }) => {
                 alt="Project screenshot"
                 className="w-full h-full object-cover"
               />
-              
+
               {/* Screen reflection */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
             </div>
@@ -102,7 +102,7 @@ const LaptopMockup = ({ image }: { image: string }) => {
         <div className="relative">
           {/* Hinge */}
           <div className="h-2 bg-secondary rounded-b-sm mx-4 shadow-inner" />
-          
+
           {/* Base */}
           <div className="bg-secondary rounded-b-xl pt-1 pb-3 px-4 shadow-xl">
             {/* Keyboard area */}
@@ -121,11 +121,11 @@ const LaptopMockup = ({ image }: { image: string }) => {
                 ))}
               </div>
             </div>
-            
+
             {/* Trackpad */}
             <div className="mx-auto mt-2 w-24 h-14 bg-muted/30 rounded-lg border border-border/50" />
           </div>
-          
+
           {/* Bottom edge */}
           <div className="h-1 bg-muted-foreground/20 rounded-b-xl mx-2" />
         </div>
@@ -149,7 +149,7 @@ const PhoneMockup = ({ image, delay = 0 }: { image: string; delay?: number }) =>
     <div className="relative w-36 md:w-44 bg-secondary rounded-[2.5rem] p-2 shadow-2xl">
       {/* Notch */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-5 bg-background rounded-full z-10" />
-      
+
       {/* Screen */}
       <div className="relative rounded-[2rem] overflow-hidden aspect-[9/19.5] bg-background">
         <img
@@ -158,7 +158,7 @@ const PhoneMockup = ({ image, delay = 0 }: { image: string; delay?: number }) =>
           className="w-full h-full object-cover"
         />
       </div>
-      
+
       {/* Home indicator */}
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-muted-foreground/30 rounded-full" />
     </div>
@@ -170,11 +170,12 @@ const WebProjectCard = ({ project, index }: { project: typeof projects.web[0]; i
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true, margin: "-100px" }}
-      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-8 lg:gap-16 py-20`}
+      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-8 lg:gap-16 py-20 transition-all`}
     >
       {/* Laptop Mockup */}
       <div className="flex-1 w-full">
@@ -241,9 +242,10 @@ const MobileProjectCard = ({ project, index }: { project: typeof projects.mobile
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-8 lg:gap-16 py-16 border-b border-border last:border-b-0`}
+      className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-8 lg:gap-16 py-16 border-b border-border last:border-b-0 transition-all`}
     >
       {/* Phone Mockups */}
       <div className="flex items-end gap-4 shrink-0">
@@ -313,7 +315,7 @@ const Projects = () => {
     <section id="projects" className="py-24 px-6 bg-card/50 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
       <div className="absolute top-1/3 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

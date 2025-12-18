@@ -18,6 +18,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "#about", label: "About" },
+    { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#packages", label: "Packages" },
     { href: "#contact", label: "Contact" },
@@ -37,20 +38,46 @@ const Navbar = () => {
         <Logo />
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+              }
+            }
+          }}
+          className="hidden md:flex items-center gap-8"
+        >
           {navLinks.map((link) => (
-            <a
+            <motion.a
               key={link.label}
               href={link.href}
+              variants={{
+                hidden: { opacity: 0, y: -20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              whileHover={{ scale: 1.1 }}
               className="text-muted-foreground hover:text-foreground transition-colors link-underline"
             >
               {link.label}
-            </a>
+            </motion.a>
           ))}
-          <Button variant="hero" asChild>
-            <a href="/cv.pdf" download>Download CV</a>
-          </Button>
-        </div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, scale: 0.8 },
+              visible: { opacity: 1, scale: 1 }
+            }}
+          >
+            <Button variant="hero" asChild>
+              <a href="/Muhammad Hasham Nadeem.pdf" download>Download CV</a>
+            </Button>
+          </motion.div>
+        </motion.div>
 
         {/* Mobile Menu Button */}
         <button
@@ -83,7 +110,7 @@ const Navbar = () => {
             </a>
           ))}
           <Button variant="hero" className="w-full" asChild>
-            <a href="/cv.pdf" download>Download CV</a>
+            <a href="/Muhammad Hasham Nadeem.pdf" download>Download CV</a>
           </Button>
         </div>
       </motion.div>

@@ -3,20 +3,51 @@ import { Mail, MapPin, Send, Github, Linkedin, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    service: "",
     message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Message sent successfully! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+
+    // Gold Star Side Cannons
+    const end = Date.now() + 3 * 1000;
+    const colors = ["#FFD700", "#FFA500", "#FF4500", "#ffffff"];
+
+    (function frame() {
+      confetti({
+        particleCount: 4,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.8 },
+        shapes: ["star"],
+        colors: colors,
+      });
+      confetti({
+        particleCount: 4,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.8 },
+        shapes: ["star"],
+        colors: colors,
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+
+    setFormData({ name: "", email: "", service: "", message: "" });
   };
 
   const socialLinks = [
@@ -159,6 +190,26 @@ const Contact = () => {
                   required
                   className="bg-secondary border-border focus:border-primary"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Interested Service
+                </label>
+                <Select
+                  value={formData.service}
+                  onValueChange={(value) => setFormData({ ...formData, service: value })}
+                >
+                  <SelectTrigger className="bg-secondary border-border focus:border-primary">
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="mobile">Mobile App Development</SelectItem>
+                    <SelectItem value="website">Website Development</SelectItem>
+                    <SelectItem value="maintenance">Maintenance & Fixes</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
