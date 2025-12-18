@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
+import resume from "./assets/pdf/Muhammad Hasham Nadeem.pdf";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,7 +75,7 @@ const Navbar = () => {
             }}
           >
             <Button variant="hero" asChild>
-              <a href="/Muhammad Hasham Nadeem.pdf" download>Download CV</a>
+              <a href={resume} target="_blank" rel="noopener noreferrer">Download CV</a>
             </Button>
           </motion.div>
         </motion.div>
@@ -110,7 +111,7 @@ const Navbar = () => {
             </a>
           ))}
           <Button variant="hero" className="w-full" asChild>
-            <a href="/Muhammad Hasham Nadeem.pdf" download>Download CV</a>
+            <a href={resume} target="_blank" rel="noopener noreferrer">Download CV</a>
           </Button>
         </div>
       </motion.div>
