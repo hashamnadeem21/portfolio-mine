@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <motion.a
       href="#"
-      className="flex items-center gap-1 group"
+      className="flex items-center gap-1 group items-center"
       whileHover={{ scale: 1.02 }}
     >
       {/* First letter stylized */}
@@ -21,11 +21,11 @@ const Logo = () => {
       />
 
       {/* Rest of name */}
-      <div className="flex flex-col -space-y-1">
+      <div className="flex flex-col -space-y-1 mb-2">
         <span className="font-bebas text-lg md:text-xl text-foreground tracking-widest leading-none">
           HASHAM
         </span>
-        <span className="font-outfit text-[10px] md:text-xs text-muted-foreground tracking-[0.3em] uppercase">
+        <span className="font-outfit text-[10px] md:text-xs text-muted-foreground tracking-[0.2em] uppercase">
           Nadeem
         </span>
       </div>

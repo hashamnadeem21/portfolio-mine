@@ -7,8 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState } from "react";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
+import { GOOGLE_SHEETS_SCRIPT_URL } from "@/lib/constants";
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,38 +18,76 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! I'll get back to you soon.");
 
-    // Gold Star Side Cannons
-    const end = Date.now() + 3 * 1000;
-    const colors = ["#FFD700", "#FFA500", "#FF4500", "#ffffff"];
+    if (GOOGLE_SHEETS_SCRIPT_URL === "YOUR_GLOGLE_SCRIPT_URL_HERE") {
+      toast.error("Google Sheets Script URL not configured. Please check src/lib/constants.ts");
+      return;
+    }
 
-    (function frame() {
-      confetti({
-        particleCount: 4,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0, y: 0.8 },
-        shapes: ["star"],
-        colors: colors,
-      });
-      confetti({
-        particleCount: 4,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1, y: 0.8 },
-        shapes: ["star"],
-        colors: colors,
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("service", formData.service);
+      formDataToSend.append("message", formData.message);
+
+      const response = await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
+        method: "POST",
+        body: formDataToSend,
       });
 
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
+      if (!response.ok) throw new Error("Submission failed");
 
-    setFormData({ name: "", email: "", service: "", message: "" });
+      toast.success("Message sent successfully! I'll get back to you soon.");
+
+      // Water Bubbles Confetti
+      const end = Date.now() + 3 * 1000;
+      const colors = ["#E0F7FA", "#B2EBF2", "#81D4FA", "#4FC3F7", "#ffffff"];
+
+      (function frame() {
+        // Left side bubbles
+        confetti({
+          particleCount: 2,
+          angle: 80,
+          spread: 55,
+          origin: { x: 0, y: 0.7 },
+          shapes: ["circle"],
+          colors: colors,
+          gravity: 0.2,
+          scalar: 2,
+          drift: 0.5,
+          ticks: 300,
+        });
+        // Right side bubbles
+        confetti({
+          particleCount: 2,
+          angle: 100,
+          spread: 55,
+          origin: { x: 1, y: 0.7 },
+          shapes: ["circle"],
+          colors: colors,
+          gravity: 0.2,
+          scalar: 2,
+          drift: -0.5,
+          ticks: 300,
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+
+      setFormData({ name: "", email: "", service: "", message: "" });
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
@@ -227,9 +267,30 @@ const Contact = () => {
                 />
               </div>
 
-              <Button type="submit" variant="hero" size="lg" className="w-full">
-                <Send className="w-5 h-5 mr-2" />
-                Send Message
+              <Button
+                type="submit"
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="mr-2"
+                    >
+                      <Send className="w-5 h-5" />
+                    </motion.div>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" />
+                    Send Message
+                  </>
+                )}
               </Button>
             </form>
           </motion.div>
