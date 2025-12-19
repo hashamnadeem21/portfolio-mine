@@ -22,6 +22,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    //@tsignore
     if (GOOGLE_SHEETS_SCRIPT_URL === "YOUR_GLOGLE_SCRIPT_URL_HERE") {
       toast.error("Google Sheets Script URL not configured. Please check src/lib/constants.ts");
       return;
