@@ -4,10 +4,16 @@ import { Briefcase, Calendar } from "lucide-react";
 const Experience = () => {
     const experiences = [
         {
+            role: "Lead Software Engineer",
+            company: "Proviloops International",
+            period: "Jan 2026 - Present",
+            description: "Leading the engineering team in architecting and delivering scalable cross-platform products. Driving technical strategy, mentoring developers, and shipping high-impact web and mobile experiences.",
+        },
+        {
             role: "Senior Full Stack Developer",
             company: "Avicenna Enterprise Solutions",
-            period: "2024 - Present",
-            description: "Leading a team of developers to build scalable web applications using React, Node.js, React Native",
+            period: "2024 - Dec 2025",
+            description: "Led a team of developers to build scalable web applications using React, Node.js and React Native, delivering enterprise-grade solutions.",
         },
         {
             role: "Mobile App Developer",
@@ -19,7 +25,7 @@ const Experience = () => {
             role: "Mobile Application Developer",
             company: "AMK SOLUTIONS LIMITED",
             period: "2021 - 2022",
-            description: "Collaborated with designers to implement responsive user interfaces and interactive web experiences.",
+            description: "Collaborated with designers to implement responsive user interfaces and interactive mobile experiences.",
         },
     ];
 
